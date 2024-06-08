@@ -16,9 +16,23 @@ const LoginForm = (): JSX.Element => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
-      email: data.get('email'),
+      username: data.get('username'),
       password: data.get('password'),
     });
+
+    fetch('https://test.v5.pryaniky.com/ru/data/v3/testmethods/docs/login', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        username: data.get('username'),
+        password: data.get('password'),
+      }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        localStorage.setItem('token', res.data.token);
+      });
   };
 
   return (
@@ -49,10 +63,10 @@ const LoginForm = (): JSX.Element => {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email"
-              name="email"
-              autoComplete="email"
+              id="username"
+              label="Имя пользователя"
+              name="username"
+              autoComplete="username"
               autoFocus
             />
             <TextField
