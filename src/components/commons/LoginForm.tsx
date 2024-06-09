@@ -8,10 +8,14 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useDispatch } from 'react-redux';
+import { UserType } from '../../redux/types/userEnum';
 
 const defaultTheme = createTheme();
 
 const LoginForm = (): JSX.Element => {
+  const dispatch = useDispatch();
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -32,6 +36,7 @@ const LoginForm = (): JSX.Element => {
       .then((res) => {
         console.log(res);
         localStorage.setItem('token', res.data.token);
+        dispatch({ type: UserType.login });
       });
   };
 

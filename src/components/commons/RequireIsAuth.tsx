@@ -1,13 +1,17 @@
-﻿import LoginPage from '../LoginPage';
+﻿import { useSelector } from 'react-redux';
+import LoginPage from '../LoginPage';
+
+import { RootState } from '../../redux/store/store';
 
 const RequireIsAuth = ({
   children,
 }: {
   children: JSX.Element;
 }): JSX.Element => {
-  const token:string|null = localStorage.getItem('token');
 
-  if (!token) {
+  const user = useSelector((state:RootState) => state.user);
+
+  if (!user.isAuth) {
     return <LoginPage />;
   }
 
