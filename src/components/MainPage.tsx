@@ -1,8 +1,10 @@
-﻿import TableData from "./commons/TableData";
+﻿
+import TableData from "./commons/TableData";
 
 
 const MainPage = (): JSX.Element => {
-  return <TableData/>;
+ 
+  return <TableData />;
 };
 
 export default MainPage;
