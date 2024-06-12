@@ -4,7 +4,10 @@
   getAllDocumentsFailed = "GET_ALL_DOCUMENTS_FAILED",
   startLoading = "START_LOADING",
   stopLoading = "STOP_LOADING",
-  addDocument = "ADD_DOCUMENT",
-  deleteDocument = "DELETE_DOCUMENT",
-  updateDocument = "UPDATE_DOCUMENT",
+  addDocumentRequested = "ADD_DOCUMENT_REQUESTED",
+  addDocumentSucceed = "ADD_DOCUMENT_SUCCEED",
+  addDocumentFailed = "ADD_DOCUMENT_FAILED",
+  delDocumentRequested = "DEL_DOCUMENT_REQUESTED",
+  delDocumentSucceed = "DEL_DOCUMENT_SUCCEED",
+  delDocumentFailed = "DEL_DOCUMENT_FAILED",
 }

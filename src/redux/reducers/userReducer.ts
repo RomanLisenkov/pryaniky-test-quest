@@ -3,15 +3,17 @@
 export type ActionUserType = {
   type: UserType;
   payload: {
-    token: "string";
+    token: string;
+    error: string | null;
   };
 };
 
 const token: string | null = localStorage.getItem("token");
 
-const initState: { isAuth: boolean; loading: boolean } = {
+const initState: { isAuth: boolean; loading: boolean; error: null | string } = {
   isAuth: !!token,
   loading: false,
+  error: null,
 };
 
 export const userReducer = (state = initState, action: ActionUserType) => {
@@ -30,6 +32,10 @@ export const userReducer = (state = initState, action: ActionUserType) => {
     }
     case UserType.stopLoginLoading: {
       return { ...state, loading: false };
+    }
+
+    case UserType.loginFailed: {
+      return { ...state, error: action.payload.error, loading: false };
     }
     default:
       return state;

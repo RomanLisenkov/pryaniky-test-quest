@@ -4,7 +4,8 @@ import { loginUser } from "../../api/apiUser";
 
 type responseUser = {
   error_code: number;
-  error_message: string;
+  error_text?: string;
+  error_message?:string;
   data: {
     token: string;
   };
@@ -19,6 +20,12 @@ function* fetchUser(action: {
     yield put({ type: UserType.startLoginLoading });
 
     const res: responseUser = yield call(loginUser, action.payload);
+    if (res.error_code !== 0) {
+      if (res.error_code == 2004) {
+        throw new Error("В доступе отказано. Проверьте логин и пароль.");
+      }
+      throw new Error(res.error_text);
+    }
     yield put({
       type: UserType.loginSucceed,
       payload: { token: res.data.token },
@@ -27,7 +34,7 @@ function* fetchUser(action: {
     yield put({
       type: UserType.loginFailed,
       payload: {
-        message: e.message,
+        error: e.message,
       },
     });
   }

@@ -5,7 +5,8 @@ import { DocumentsInterface } from "../reducers/documentsReducer";
 
 type responseDocuments = {
   error_code: number;
-  error_message: string;
+  error_text?: string;
+  error_message?:string;
   data: DocumentsInterface[];
   profiling: string;
   timings: string | null;

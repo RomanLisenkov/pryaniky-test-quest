@@ -12,12 +12,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { UserType } from "../../redux/types/userEnum";
 import { useState } from "react";
 import { RootState } from "../../redux/store/store";
-import CircularIndeterminate from "./Progress";
 
 const defaultTheme = createTheme();
 
 const LoginForm = (): JSX.Element => {
-  
+  const user = useSelector((state: RootState) => state.user);
 
   const dispatch = useDispatch();
   const [username, setUsername] = useState<string>("");
@@ -56,7 +55,6 @@ const LoginForm = (): JSX.Element => {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -119,6 +117,7 @@ const LoginForm = (): JSX.Element => {
             </Button>
           </Box>
         </Box>
+        {user.error && <p style={{ color: "red" }}>{user.error}</p>}
       </Container>
     </ThemeProvider>
   );
